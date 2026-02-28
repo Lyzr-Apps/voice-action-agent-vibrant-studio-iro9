@@ -113,7 +113,7 @@ export default function Page() {
   // Ctrl+O hotkey listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === 'o') {
+      if (e.ctrlKey && e.key === 'Meta') {
         e.preventDefault()
         setInitialCommand(undefined)
         setOverlayOpen(true)

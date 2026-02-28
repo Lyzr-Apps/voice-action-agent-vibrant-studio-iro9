@@ -48,7 +48,7 @@ export default function EmptyState({ onExampleClick }: EmptyStateProps) {
         <div>
           <h2 className="text-xl font-bold text-foreground mb-1">Ready to listen</h2>
           <p className="text-sm text-muted-foreground max-w-sm">
-            Press <kbd className="px-1.5 py-0.5 rounded bg-secondary border border-border text-xs font-mono">Ctrl+O</kbd> to give your first voice command, or try an example below.
+            Press <kbd className="px-1.5 py-0.5 rounded bg-secondary border border-border text-xs font-mono">Ctrl+Win</kbd> to give your first voice command, or try an example below.
           </p>
         </div>
       </div>

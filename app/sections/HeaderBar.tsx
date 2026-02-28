@@ -19,7 +19,7 @@ export default function HeaderBar() {
         </div>
         <Badge variant="outline" className="flex items-center gap-1.5 px-3 py-1.5 border-border bg-secondary/50 text-muted-foreground text-xs">
           <RiKeyboardBoxLine className="w-3.5 h-3.5" />
-          <span>Ctrl+O</span>
+          <span>Ctrl+Win</span>
         </Badge>
       </div>
       <Separator className="bg-border" />
