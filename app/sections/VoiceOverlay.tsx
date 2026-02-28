@@ -170,12 +170,70 @@ export default function VoiceOverlay({ isOpen, onClose, onComplete, initialComma
 
     try {
       const result = await callAIAgent(transcript.trim(), AGENT_ID)
+
       if (result.success) {
-        const parsed = parseLLMJson(result?.response?.result)
-        const intent = parsed?.intent || 'assist'
-        const title = parsed?.title || 'Response'
-        const content = parsed?.content || result?.response?.message || ''
-        const commandType = parsed?.command_type || 'Generate'
+        // Robust multi-layer extraction of the agent response fields
+        // The response can come in many shapes depending on how Lyzr wraps it
+        let intent = ''
+        let title = ''
+        let content = ''
+        let commandType = ''
+
+        const response = result?.response
+        const rawResult = response?.result
+
+        // Helper to extract fields from any object that has them
+        const extractFields = (obj: any): boolean => {
+          if (!obj || typeof obj !== 'object') return false
+          if (obj.content && typeof obj.content === 'string' && obj.content.length > 10) {
+            intent = obj.intent || ''
+            title = obj.title || ''
+            content = obj.content
+            commandType = obj.command_type || ''
+            return true
+          }
+          return false
+        }
+
+        // Strategy 1: Direct fields on result
+        if (!extractFields(rawResult)) {
+          // Strategy 2: Parse result through parseLLMJson
+          const parsed = parseLLMJson(rawResult)
+          if (!extractFields(parsed)) {
+            // Strategy 3: Try parsing the raw_response string
+            if (result?.raw_response) {
+              const rawParsed = parseLLMJson(result.raw_response)
+              if (!extractFields(rawParsed)) {
+                // Strategy 4: Check nested result.result
+                if (rawParsed?.result) {
+                  extractFields(rawParsed.result)
+                }
+              }
+            }
+            // Strategy 5: If still no content, try response.message or result as text
+            if (!content) {
+              if (!extractFields(parsed?.result)) {
+                // Strategy 6: Look for text/message fallback
+                content = rawResult?.text
+                  || rawResult?.message
+                  || rawResult?.response
+                  || response?.message
+                  || (typeof rawResult === 'string' ? rawResult : '')
+                  || ''
+              }
+            }
+          }
+        }
+
+        // Final defaults
+        intent = intent || 'assist'
+        title = title || 'Response'
+        commandType = commandType || 'Generate'
+
+        // If we still have no content at all, show a fallback
+        if (!content) {
+          content = response?.message || 'The agent returned a response but no content could be extracted. Please try again.'
+        }
 
         const data = { intent, title, content, commandType }
         setResultData(data)

@@ -110,7 +110,7 @@ export default function Page() {
     }
   }, [history])
 
-  // Ctrl+O hotkey listener
+  // Ctrl+Win hotkey listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key === 'Meta') {
