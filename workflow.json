@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    {
+      "id": "input_node",
+      "type": "Input",
+      "label": "Voice Command",
+      "nodeCategory": "input"
+    },
+    {
+      "id": "voiceaction_agent",
+      "type": "Agent",
+      "label": "VoiceAction Agent",
+      "nodeCategory": "agent"
+    },
+    {
+      "id": "output_node",
+      "type": "Output",
+      "label": "Text Response",
+      "nodeCategory": "end"
+    }
+  ],
+  "edges": [
+    {
+      "source": "input_node",
+      "target": "voiceaction_agent"
+    },
+    {
+      "source": "voiceaction_agent",
+      "target": "output_node"
+    }
+  ]
+}

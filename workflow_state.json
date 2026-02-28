@@ -1,0 +1,21 @@
+{
+  "agents": [
+    {
+      "agent_id": "69a280bb96ed232cfb0c7c82",
+      "name": "VoiceAction Agent",
+      "description": "Interprets voice commands and executes text tasks including document generation (PRDs, emails, outlines), text rephrasing/transformation, writing assistance, and research summaries.",
+      "provider": "Perplexity",
+      "model": "sonar-pro",
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "agent_type": "json",
+      "capabilities": {
+        "image_output": false,
+        "voice": false,
+        "file_output": false
+      },
+      "response_schema_file": "response_schemas/voiceaction_agent_response.json"
+    }
+  ],
+  "workflow_file": "workflow.json"
+}

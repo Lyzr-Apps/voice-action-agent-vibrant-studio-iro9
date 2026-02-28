@@ -1,0 +1,20 @@
+{
+  "agent_name": "VoiceAction Agent",
+  "agent_id": "69a280bb96ed232cfb0c7c82",
+  "description": "Interprets voice commands and executes text tasks including document generation (PRDs, emails, outlines), text rephrasing/transformation, writing assistance, and research summaries.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "intent": "string",
+    "title": "string",
+    "content": "string",
+    "command_type": "string"
+  },
+  "example_response": {
+    "intent": "The detected intent category: generate, rephrase, research, or assist",
+    "title": "A short title summarizing the command",
+    "content": "The full text response to the user's command, formatted in markdown",
+    "command_type": "Badge label: Generate, Rephrase, Research, or Transform"
+  }
+}
